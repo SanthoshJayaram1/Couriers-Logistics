@@ -1,10 +1,11 @@
 import express from "express";
 const router = express.Router();
 import CourierController from "../controllers/courierController";
+import { isAuthenticated } from "../../../middlewares/authMiddleware";
 
-router.post("/", CourierController.createCourier);
-router.get("/:id", CourierController.getCourierById);
-router.put("/:id", CourierController.updateCourier);
-router.delete("/:id", CourierController.deleteCourier);
+router.post("/", isAuthenticated, CourierController.createCourier);
+router.get("/:id", isAuthenticated, CourierController.getCourierById);
+router.put("/:id", isAuthenticated, CourierController.updateCourier);
+router.delete("/:id", isAuthenticated, CourierController.deleteCourier);
 
 export default router;

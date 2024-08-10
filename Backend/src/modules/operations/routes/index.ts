@@ -5,8 +5,8 @@ import vehicleRoutes from "./vehicleRoutes";
 
 const router = express.Router();
 
-router.use("/orders", courierRoutes);
-router.use("/payments", shipmentRoutes);
-router.use("/customers", vehicleRoutes);
+router.use("/courier", courierRoutes);
+router.use("/shipment", shipmentRoutes);
+router.use("/vehicle", vehicleRoutes);
 
 export default router;
