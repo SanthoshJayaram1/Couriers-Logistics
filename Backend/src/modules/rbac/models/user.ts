@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import { RoleCodes } from "./role";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -22,7 +23,11 @@ const userSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["admin", "employee"],
+    enum: [
+      RoleCodes.COMPANY_ADMIN,
+      RoleCodes.COMPANY_MANAGER,
+      RoleCodes.COMPANY_USER,
+    ],
     default: "employee",
   },
 });

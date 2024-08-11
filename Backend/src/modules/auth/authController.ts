@@ -6,7 +6,7 @@ import {
 } from "../../utils/jwtToken.js";
 import ErrorHandler from "../../utils/errorHandler.js";
 import jwt from "jsonwebtoken";
-import User from "./userModel.js";
+import User from "../rbac/models/user.js";
 import { AuditLogService } from "../auditLog/auditLogService.js";
 
 class AuthController {

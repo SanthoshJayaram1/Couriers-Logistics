@@ -1,4 +1,4 @@
-import User from "./userModel.js";
+import User from "../rbac/models/user.js";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "../../utils/errorHandler.js";
 import bcrypt from "bcryptjs";

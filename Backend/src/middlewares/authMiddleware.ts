@@ -1,4 +1,4 @@
-import User from "../modules/auth/userModel";
+import User from "../modules/rbac/models/user";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "../utils/errorHandler";
 import catchAsyncErrors from "../utils/catchAsyncErrors";
