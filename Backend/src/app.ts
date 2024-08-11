@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import authRoutes from "../src/modules/auth/authRoutes"
 import bookingRoutes from "../src/modules/bookings/routes";
 import operationsRoutes from "../src/modules/operations/routes";
 import customerServiceRoutes from "../src/modules/customer-service/routes/customerServiceRoute";
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/booking", bookingRoutes);
 app.use("/api/operations", operationsRoutes);
 app.use("/api/customer-service", customerServiceRoutes);

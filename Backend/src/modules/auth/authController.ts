@@ -6,6 +6,8 @@ import {
 } from "../../utils/jwtToken.js";
 import ErrorHandler from "../../utils/errorHandler.js";
 import jwt from "jsonwebtoken";
+import User from "./userModel.js";
+import { AuditLogService } from "../auditLog/auditLogService.js";
 
 class AuthController {
   static login = catchAsyncErrors(async (req, res, next) => {
@@ -20,6 +22,18 @@ class AuthController {
     );
 
     await AuthService.updateUserRefreshToken(user._id, refreshToken);
+
+    const auditLogService = new AuditLogService(
+      User,
+      new User(user),
+      "User",
+      user._id.toString()
+    );
+
+    await auditLogService.logAudit(
+      {},
+      { event: "Login", userId: user._id.toString() }
+    );
 
     res.status(200).json({
       success: true,
