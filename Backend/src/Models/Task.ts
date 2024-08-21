@@ -5,12 +5,17 @@ const TaskSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employee",
       required: true,
-    }, // Reference to the manager
+    }, // Manager who assigned the task
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employee",
       required: true,
-    }, // Reference to the employee (courier boy or customer care employee)
+    }, // Employee assigned to the task
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Customer",
+      required: true,
+    }, // Customer related to the task
     taskType: {
       type: String,
       enum: [
@@ -25,12 +30,17 @@ const TaskSchema = new mongoose.Schema(
       required: true,
     }, // Type of task assigned
     dateAssigned: { type: Date, default: Date.now, required: true }, // Date task was assigned
-    status: {
-      type: String,
-      enum: ["Pending", "In Progress", "Completed", "Failed"],
-      default: "Pending",
-      required: true,
-    }, // Status of the task
+    statusUpdates: [
+      {
+        status: {
+          type: String,
+          enum: ["Pending", "In Progress", "Completed", "Failed"],
+          required: true,
+        }, // Status at a given point in time
+        description: { type: String }, // Additional description or notes about the status
+        updatedAt: { type: Date, default: Date.now }, // Timestamp of when this status was updated
+      },
+    ],
     courierTaskDetails: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CourierTaskDetails",
