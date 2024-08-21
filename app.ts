@@ -1,14 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRoutes from "../src/modules/auth/authRoutes"
-import bookingRoutes from "../src/modules/bookings/routes";
-import operationsRoutes from "../src/modules/operations/routes";
-import customerServiceRoutes from "../src/modules/customer-service/routes/customerServiceRoute";
+import authRoutes from "./Backend/src/modules/auth/authRoutes"
+import bookingRoutes from "./Backend/src/modules/bookings/routes";
+import operationsRoutes from "./Backend/src/modules/operations/routes";
+import customerServiceRoutes from "./Backend/src/modules/customer-service/routes/customerServiceRoute";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import ErrorHandler from "./utils/errorHandler";
-import errorHandler from "./middlewares/errorHandler";
+import ErrorHandler from "./Backend/src/utils/errorHandler";
+import errorHandler from "./Backend/src/middlewares/errorHandler";
 
 const app = express();
 dotenv.config();
