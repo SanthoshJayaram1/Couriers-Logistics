@@ -5,12 +5,17 @@ const CustomerCareTaskDetailsSchema = new mongoose.Schema(
       ref: "Task",
       required: true,
     }, // Reference to the general task
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Customer",
+      required: true,
+    }, // Reference to the customer related to this task
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
+    }, // Reference to the employee making the follow-up
     followUpDetails: {
-      customerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Customer",
-        required: true,
-      }, // Customer to follow up with
       followUpType: {
         type: String,
         enum: ["POD", "PendingPayment", "Inquiry", "ShipmentUpdate"],

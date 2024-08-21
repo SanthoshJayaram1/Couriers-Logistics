@@ -5,8 +5,17 @@ const CourierTaskDetailsSchema = new mongoose.Schema(
       ref: "Task",
       required: true,
     }, // Reference to the general task
+    customerId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Customer",
+      required: true,
+    }, // Reference to the customer related to this task
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Employee",
+      required: true,
+    }, // Reference to the courier responsible for the task
     pickupDetails: {
-      customerId: { type: mongoose.Schema.Types.ObjectId, ref: "Customer" }, // Reference to the customer for pickup
       address: { type: String }, // Pickup address
       consignmentDetails: {
         type: mongoose.Schema.Types.ObjectId,
