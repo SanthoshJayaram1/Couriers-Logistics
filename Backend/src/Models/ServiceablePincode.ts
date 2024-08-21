@@ -1,18 +1,16 @@
 const ServiceablePincodeSchema = new mongoose.Schema(
   {
-    pincode: { type: String, required: true, unique: true }, // Unique Pincode
-    placeName: { type: String, required: true }, // Name of the place
+    pincode: { type: String, unique: true, required: true }, // Unique Pincode
+    placeName: { type: String, required: true }, // Name of the place or locality
     address: { type: String, required: true }, // Address associated with the pincode
-    manager: {
-      managerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Employee",
-        required: true,
-      }, // Reference to Employee model
-      name: { type: String, required: true }, // Manager's name
-      contactNumber: { type: String, required: true }, // Manager's contact number
-      emailId: { type: String, required: true }, // Manager's email ID
-    },
+    branches: [{ type: mongoose.Schema.Types.ObjectId, ref: "Branch" }], // References to branches or franchises in this pincode
+    serviceStatus: {
+      type: String,
+      enum: ["Serviceable", "Non-Serviceable", "Limited"],
+      default: "Serviceable",
+      required: true,
+    }, // Status of serviceability in this pincode
+    managerId: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" }, // Optional: Manager responsible for this pincode, if specific
   },
   { timestamps: true }
 );
