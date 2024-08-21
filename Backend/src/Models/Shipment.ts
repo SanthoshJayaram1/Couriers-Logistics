@@ -3,10 +3,9 @@ const ShipmentSchema = new mongoose.Schema(
     shipmentId: { type: String, unique: true, required: true }, // Unique ID for the shipment
     orderId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Order",
+      ref: "CustomerOrder",
       required: true,
-    }, // Reference to the order
-    transactionId: { type: mongoose.Schema.Types.ObjectId, ref: "Transaction" }, // Reference to the transaction
+    }, // Reference to the customer order
     origin: { type: String, required: true }, // Origin address
     destination: { type: String, required: true }, // Destination address
     recipientDetails: {
@@ -47,6 +46,13 @@ const ShipmentSchema = new mongoose.Schema(
       enum: ["Booked", "In Transit", "Out for Delivery", "Delivered"],
       required: true,
     }, // Current shipment status
+
+    // Images and Documents
+    consignmentNoteImages: [{ type: String }], // Links to consignment note images from co-loaders
+    proofOfDeliveryImages: [{ type: String }], // Links to proof of delivery (POD) images
+    otherShipmentImages: [{ type: String }], // Links to any other relevant shipment images (e.g., damaged goods, pickup location)
+    invoiceImage: { type: String }, // Link to the invoice image that travels with the shipment
+
     charges: {
       freightCharge: { type: Number },
       packingCharge: { type: Number },
