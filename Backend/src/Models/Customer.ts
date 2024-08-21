@@ -4,8 +4,8 @@ const CustomerSchema = new mongoose.Schema(
     name: { type: String, required: true }, // Customer name (either individual or corporate contact person)
 
     // Common Fields
-    address: { type: String, required: true }, // Address for the customer
-    pincode: { type: String, required: true }, // Pincode for the address
+    address: { type: String, required: true }, // Primary address for the customer
+    pincode: { type: String, required: true }, // Pincode for the primary address
     placeOfOrigin: { type: String, required: true }, // City or region (place of origin)
 
     // Contact Details
@@ -25,13 +25,26 @@ const CustomerSchema = new mongoose.Schema(
       companyLogo: { type: String }, // Path to the company's logo file
     },
 
+    // Delivery Addresses
+    deliveryAddresses: [
+      {
+        label: { type: String, required: true }, // Label for the address (e.g., "Home", "Office")
+        recipientName: { type: String, required: true }, // Name of the recipient for this address
+        contactNumber: { type: String, required: true }, // Contact number for delivery
+        address: { type: String, required: true }, // Delivery address
+        pincode: { type: String, required: true }, // Pincode for the delivery address
+        city: { type: String, required: true }, // City for the delivery address
+        state: { type: String, required: true }, // State for the delivery address
+        country: { type: String, required: true }, // Country for the delivery address
+      },
+    ],
+
     // Customer Type
     customerType: {
       type: String,
-      enum: ["Corporate", "Individual"],
+      enum: ["CorporateCustomer", "IndividualCustomer"],
       required: true,
     }, // Type of customer (Corporate or Individual)
   },
   { timestamps: true }
 );
-
