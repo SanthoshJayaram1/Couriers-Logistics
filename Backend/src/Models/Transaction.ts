@@ -11,6 +11,11 @@ const TransactionSchema = new mongoose.Schema(
       ref: "Customer",
       required: true,
     }, // Reference to the customer
+    branchId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Branch",
+      required: true,
+    }, // Branch or franchise originating the transaction
     paymentMode: {
       type: String,
       enum: ["Cash", "FreightPay", "ToPay"],

@@ -1,13 +1,17 @@
 const EmployeeSchema = new mongoose.Schema(
   {
-    employeeId: { type: String, unique: true },
+    employeeId: { type: String, unique: true, required: true }, // Unique ID for the employee
     name: { type: String, required: true },
     role: {
       type: String,
-      enum: ["admin", "manager", "courierBoy", "customerCareEmployee"],
+      enum: ["manager", "courierBoy", "customerCareEmployee"],
       required: true,
     },
-    photo: { type: String }, // Path to photo file
+    branchId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Branch",
+      required: true,
+    }, // Reference to the branch/franchise they belong to
     mobileNumber: { type: String, required: true },
     residenceAddress: { type: String, required: true },
     adhaarNumber: { type: String, required: true },

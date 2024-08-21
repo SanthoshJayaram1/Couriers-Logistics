@@ -11,6 +11,11 @@ const TaskSchema = new mongoose.Schema(
       ref: "Employee",
       required: true,
     }, // Employee assigned to the task
+    branchId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Branch",
+      required: true,
+    }, // Reference to the branch or franchise responsible for this task
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
