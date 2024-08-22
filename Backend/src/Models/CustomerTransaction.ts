@@ -1,5 +1,10 @@
 const CustomerTransactionSchema = new mongoose.Schema(
   {
+    companyTransaction: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CompanyTransaction",
+      required: true,
+    }, // Reference to the corresponding CompanyTransaction (income)
     transactionId: { type: String, unique: true, required: true }, // Unique ID for the transaction
     orderId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -29,7 +34,6 @@ const CustomerTransactionSchema = new mongoose.Schema(
       default: "Pending",
       required: true,
     }, // Payment status
-    shipments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Shipment" }], // Array of references to related shipments
     payments: [
       {
         paymentDate: { type: Date, default: Date.now },
@@ -37,6 +41,7 @@ const CustomerTransactionSchema = new mongoose.Schema(
         paymentMode: { type: String, enum: ["Cash", "FreightPay", "ToPay"] },
       },
     ],
+    shipments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Shipment" }], // Array of references to related shipments
   },
   { timestamps: true }
 );

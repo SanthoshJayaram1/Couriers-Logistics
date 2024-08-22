@@ -1,5 +1,10 @@
 const CoLoaderTransactionSchema = new mongoose.Schema(
   {
+    companyTransaction: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CompanyTransaction",
+      required: true,
+    }, // Reference to the corresponding CompanyTransaction (expense)
     coLoaderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "CoLoader",

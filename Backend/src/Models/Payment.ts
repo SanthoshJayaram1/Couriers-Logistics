@@ -1,16 +1,21 @@
 const PaymentSchema = new mongoose.Schema(
   {
     paymentId: { type: String, unique: true, required: true }, // Unique ID for each payment
-    transactionId: {
+    companyTransaction: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Transaction",
+      ref: "CompanyTransaction",
       required: true,
-    }, // Reference to the transaction
-    customerId: {
+    }, // Reference to the related company transaction
+    relatedTransaction: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Customer",
+      refPath: "relatedModel",
       required: true,
-    }, // Reference to the customer
+    }, // Reference to related co-loader or customer transaction
+    relatedModel: {
+      type: String,
+      required: true,
+      enum: ["CoLoaderTransaction", "CustomerTransaction"],
+    }, // Determines if relatedTransaction refers to CoLoaderTransaction or CustomerTransaction
     paymentDate: { type: Date, default: Date.now, required: true }, // Date of payment
     amountPaid: { type: Number, required: true }, // Amount paid in this payment
     paymentMode: {
@@ -23,7 +28,7 @@ const PaymentSchema = new mongoose.Schema(
       enum: ["Pending", "Completed", "Failed"],
       default: "Pending",
       required: true,
-    }, // Status of the payment
+    },
   },
   { timestamps: true }
 );
