@@ -1,4 +1,4 @@
-const TransactionSchema = new mongoose.Schema(
+const CustomerTransactionSchema = new mongoose.Schema(
   {
     transactionId: { type: String, unique: true, required: true }, // Unique ID for the transaction
     orderId: {
