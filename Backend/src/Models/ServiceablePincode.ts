@@ -10,7 +10,6 @@ const ServiceablePincodeSchema = new mongoose.Schema(
       default: "Serviceable",
       required: true,
     }, // Status of serviceability in this pincode
-    managerId: { type: mongoose.Schema.Types.ObjectId, ref: "Employee" }, // Optional: Manager responsible for this pincode, if specific
   },
   { timestamps: true }
 );

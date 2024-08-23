@@ -15,11 +15,17 @@ const BranchSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employee",
       required: true,
-    }, // Manager in charge
+    }, // Manager in charge of this branch
     courierBoys: [{ type: mongoose.Schema.Types.ObjectId, ref: "Employee" }], // Courier boys assigned to this branch
     customerCareEmployees: [
       { type: mongoose.Schema.Types.ObjectId, ref: "Employee" },
     ], // Customer care employees in this branch
+    serviceStatus: {
+      type: String,
+      enum: ["Serviceable", "Non-Serviceable", "Limited"],
+      default: "Serviceable",
+      required: true,
+    }, // Service status of the branch
   },
   { timestamps: true }
 );
