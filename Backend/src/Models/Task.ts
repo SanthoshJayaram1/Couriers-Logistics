@@ -6,6 +6,16 @@ const TaskSchema = new mongoose.Schema(
       ref: "Employee",
       required: true,
     }, // Manager who assigned the task
+    orderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CustomerOrder",
+      required: true,
+    }, // Reference to the customer order
+    orderType: {
+      type: String,
+      enum: ["Forward", "ReversePickup"],
+      required: true,
+    }, // Type of the order
     assignedTo: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Employee",
@@ -46,14 +56,15 @@ const TaskSchema = new mongoose.Schema(
         updatedAt: { type: Date, default: Date.now }, // Timestamp of when this status was updated
       },
     ],
-    courierTaskDetails: {
+    taskDetails: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "CourierTaskDetails",
-    }, // Reference to courier-specific details
-    customerCareTaskDetails: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CustomerCareTaskDetails",
-    }, // Reference to customer care-specific details
+      refPath: "taskTypeModel",
+    }, // Dynamic reference to either CourierTaskDetails or CustomerCareTaskDetails based on taskType
+    taskTypeModel: {
+      type: String,
+      enum: ["CourierTaskDetails", "CustomerCareTaskDetails"], // Dynamic model reference
+      required: true,
+    },
   },
   { timestamps: true }
 );

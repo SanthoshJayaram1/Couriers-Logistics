@@ -7,6 +7,7 @@ const DailyWorkAssignmentSchema = new mongoose.Schema(
       required: true,
     }, // Reference to the employee
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }], // Array of tasks assigned on this date
+    completedTasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }], // Array of tasks completed on this date
   },
   { timestamps: true }
 );

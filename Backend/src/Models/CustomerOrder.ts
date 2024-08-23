@@ -1,16 +1,16 @@
 const CustomerOrderSchema = new mongoose.Schema(
   {
-    orderId: { type: String, unique: true, required: true }, // Unique ID for the order
+    orderId: { type: String, unique: true, required: true },
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Customer",
       required: true,
-    }, // Reference to the customer
-    pincode: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ServiceablePincode",
+    }, 
+    orderType: {
+      type: String,
+      enum: ["Forward", "ReversePickup"],
       required: true,
-    }, // Pincode related to the order
+    }, 
     status: {
       type: String,
       enum: [
@@ -23,15 +23,29 @@ const CustomerOrderSchema = new mongoose.Schema(
       ],
       default: "Pending",
       required: true,
-    }, // Current status of the order
+    },
+    origin: {
+      name: { type: String, required: true },
+      address: { type: String, required: true },
+      mobileNumber: { type: String, required: true },
+      pincode: { type: String, required: true },
+      placeOfOrigin: { type: String, required: true },
+    },
+    destination: {
+      name: { type: String, required: true },
+      address: { type: String, required: true },
+      mobileNumber: { type: String, required: true },
+      pincode: { type: String, required: true },
+      placeOfDestination: { type: String, required: true },
+    },
     items: [
       {
-        description: { type: String, required: true }, // Description of the item(s) in the order
-        quantity: { type: Number, required: true }, // Quantity of items
+        description: { type: String, required: true },
+        quantity: { type: Number, required: true },
       },
     ],
-    totalAmount: { type: Number, required: true }, // Total amount for the order
-    orderDate: { type: Date, default: Date.now, required: true }, // Date the order was placed
+    totalAmount: { type: Number, required: true },
+    orderDate: { type: Date, default: Date.now, required: true },
   },
   { timestamps: true }
 );
